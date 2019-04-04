@@ -1,0 +1,23 @@
+import java.util.*;
+public class Hebing7
+{
+	public static void main(String[] args) 
+	{
+		int[] a = {1,7,9,11,13,15,17,19};
+		int[] b = {2,4,6,8,10};
+		int q = a.length + b.length;
+		int[] c = Arrays.copyOf(a,q);
+		System.arraycopy(b,0,c,q-b.length,b.length);
+		
+		for(int i = 0;i < c.length-1;i++){
+			for(int j = 0;j < c.length - 1 - i;j++){
+				if(c[j]>c[j+1]){
+					int temp = c[j];
+					c[j] = c[j+1];
+					c[j+1] = temp;
+				}
+			}
+		}
+		System.out.println(Arrays.toString(c));
+	}
+}
