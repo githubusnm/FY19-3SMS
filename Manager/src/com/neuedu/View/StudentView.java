@@ -1,6 +1,9 @@
-package com.neuedu.Manager;
+package com.neuedu.View;
 
 import java.util.Scanner;
+
+import com.neuedu.Manager.StudentManager;
+import com.neuedu.entity.Student;
 
 public class StudentView {
 
@@ -34,6 +37,11 @@ public class StudentView {
 		case 2:
 			System.out.println("请输入需要更改的学生id：");
 			int updateid = scanner.nextInt();
+			boolean findById2 = studentManager.findById(updateid);
+			if (findById2 == false) {
+				System.out.println("学生不存在");
+				showView();
+			}
 			System.out.println("请输入需要更改的学生属性：");
 			Object o = scanner.next();
 			System.out.println("请输入更改后的学生的属性的值：");
@@ -59,9 +67,10 @@ public class StudentView {
 			showView();
 			break;
 		case 6:
-			
+
 			break;
 		case 7:
+			System.out.println("退出中~");
 			System.exit(0);
 			break;
 		default:

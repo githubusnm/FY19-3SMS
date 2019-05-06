@@ -1,5 +1,8 @@
 package com.neuedu.Manager;
 
+import com.neuedu.View.CourseView;
+import com.neuedu.View.StudentView;
+
 public class Main {
 
 	public static void main(String[] args) {

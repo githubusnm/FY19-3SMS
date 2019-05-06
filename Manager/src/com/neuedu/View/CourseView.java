@@ -1,6 +1,9 @@
-package com.neuedu.Manager;
+package com.neuedu.View;
 
 import java.util.Scanner;
+
+import com.neuedu.Manager.CourseManager;
+import com.neuedu.entity.Course;
 
 public class CourseView {
 
@@ -10,7 +13,7 @@ public class CourseView {
 	public void showView() {
 		System.out.println("请选择服务：");
 		System.out.println("==========");
-		System.out.println("1.增加课程" + "\t" + "2.修改课程" + "\t" + "3.删除课程");
+		System.out.println("1.增加课程" + "\t" + "2.修改课程" + "\t" + "3.删除课程"+"\t"+"4.返回上层");
 		System.out.println("==========");
 		switch (scanner.nextInt()) {
 		case 1:
@@ -44,8 +47,11 @@ public class CourseView {
 		case 3:
 			System.out.println("请输入要删除的课程id：");
 			courseManager.delete(scanner.nextInt());
-			System.out.println("删除成功");
 			showView();
+			break;
+		case 4:
+			StudentView studentView = new StudentView();
+			studentView.showView();
 			break;
 		default:
 			System.out.println("输入有误");
