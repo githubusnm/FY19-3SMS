@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.neuedu.Manager.Main;
-
 public class DButils {
 
 	private static Properties prop;
@@ -15,7 +13,7 @@ public class DButils {
 	static { 
 		prop = new Properties();
 		try {
-			prop.load(Main.class.getResourceAsStream("/settings.properties"));
+			prop.load(DButils.class.getResourceAsStream("/settings.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

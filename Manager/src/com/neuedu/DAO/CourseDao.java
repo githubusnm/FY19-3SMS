@@ -1,5 +1,7 @@
 package com.neuedu.DAO;
 
+import java.util.List;
+
 import com.neuedu.entity.Course;
 
 public interface CourseDao {
@@ -11,5 +13,9 @@ public interface CourseDao {
 	void update(int id, Object o, Object op);
 	
 	void delete(int id);
+	
+	void findStudentByCourse(int id);
+	
+	public List<Course> findCourseByStudentId(int courseid);
 	
 }

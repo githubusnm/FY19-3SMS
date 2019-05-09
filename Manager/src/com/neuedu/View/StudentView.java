@@ -9,6 +9,7 @@ public class StudentView {
 
 	Scanner scanner = new Scanner(System.in);
 	StudentManager studentManager = new StudentManager();
+	CourseView courseView = new CourseView();
 
 	public void showView() {
 		System.out.println("请选择服务：");
@@ -29,8 +30,6 @@ public class StudentView {
 			}
 			System.out.println("请输入学生姓名：");
 			student.setStudent_name(scanner.next());
-			System.out.println("请输入学生课程id：");
-			student.setCourse_id(scanner.nextInt());
 			studentManager.insert(student);
 			showView();
 			break;
@@ -51,7 +50,12 @@ public class StudentView {
 			break;
 		case 3:
 			System.out.println("请输入要删除的学生的id：");
-			studentManager.delete(scanner.nextInt());
+			int deleteid = scanner.nextInt();
+			if(studentManager.findById(deleteid) == false) {
+				System.out.println("学生不存在");
+				showView();
+			}
+			studentManager.delete(deleteid);
 			showView();
 			break;
 		case 4:
@@ -67,10 +71,10 @@ public class StudentView {
 			showView();
 			break;
 		case 6:
-
+			courseView.showView();
 			break;
 		case 7:
-			System.out.println("退出中~");
+			System.out.println("期待再次为您服务");
 			System.exit(0);
 			break;
 		default:

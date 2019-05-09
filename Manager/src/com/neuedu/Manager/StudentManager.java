@@ -22,8 +22,7 @@ public class StudentManager implements StudentDao {
 			while (executeQuery.next()) {
 				int student_id = executeQuery.getInt(1);
 				String student_name = executeQuery.getString(2);
-				int course_id = executeQuery.getInt(3);
-				Student student = new Student(student_id, student_name, course_id);
+				Student student = new Student(student_id, student_name);
 				students.add(student);
 			}
 		} catch (SQLException e) {
@@ -42,10 +41,9 @@ public class StudentManager implements StudentDao {
 	public void insert(Student student) {
 		try (Connection connection = DButils.getConnection();
 				PreparedStatement prepareStatement = connection
-						.prepareStatement("insert into StudentManager values(?,?,?)");) {
+						.prepareStatement("insert into StudentManager values(?,?)");) {
 			prepareStatement.setInt(1, student.getStudent_id());
 			prepareStatement.setString(2, student.getStudent_name());
-			prepareStatement.setInt(3, student.getCourse_id());
 			prepareStatement.executeUpdate();
 			System.out.println("添加成功");
 		} catch (SQLException e) {
@@ -55,30 +53,31 @@ public class StudentManager implements StudentDao {
 	}
 
 	public boolean findById(int id) {
-		boolean b = false;
+		ResultSet executeQuery = null;
 		try (Connection connection = DButils.getConnection();
 				PreparedStatement prepareStatement = connection
 						.prepareStatement("SELECT * FROM studentmanager " + 
-								" JOIN coursemanager " + 
-								" ON studentmanager.course_id = coursemanager.course_id" + 
 								" WHERE student_id = " + id);) {
-			ResultSet executeQuery = prepareStatement.executeQuery();
+			executeQuery = prepareStatement.executeQuery();
 			while (executeQuery.next()) {
 				String string = executeQuery.getString(2);
 				if (string != null) {
-					b = true;
 					int sid = executeQuery.getInt(1);
 					String sname = executeQuery.getString(2);
-					int cid = executeQuery.getInt(3);
-					String scourse = executeQuery.getString(5);
-					System.out.println("学生id：" + sid + "，学生姓名：" + sname + "，学生课程id：" + cid + ",学生课程名称：" + scourse);
-					return b;
+					System.out.println("学生id：" + sid + "，学生姓名：" + sname);
+					return true;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				executeQuery.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return b;
+		return false;
 	}
 
 	public void delete(int id) {

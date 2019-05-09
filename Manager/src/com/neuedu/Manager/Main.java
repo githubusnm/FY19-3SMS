@@ -1,6 +1,5 @@
 package com.neuedu.Manager;
 
-import com.neuedu.View.CourseView;
 import com.neuedu.View.StudentView;
 
 public class Main {
@@ -10,8 +9,7 @@ public class Main {
 		System.out.println("==================");
 		StudentView view = new StudentView();
 		view.showView();
-		CourseView courseView = new CourseView();
-		courseView.showView();
+		
 		
 		
 //		for(int i=101;i<=200;i++) {
